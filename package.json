@@ -14,8 +14,16 @@
     "lint": "eslint src",
     "format": "eslint --fix src"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/todaqmicro/micro-node.git"
+  },
   "author": "Matthew Mihok <matthew.mihok@todaq.net>",
-  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/todaqmicro/micro-node/issues"
+  },
+  "homepage": "https://github.com/todaqmicro/micro-node#readme",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
