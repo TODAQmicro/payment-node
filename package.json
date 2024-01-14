@@ -1,9 +1,8 @@
 {
   "name": "@todaqmicro/payment-node",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "TODAQ Micro's Node.js SDK",
   "main": "cjs/index.js",
-  "type": "module",
   "exports": {
     "require": "./cjs/index.js",
     "import": "./esm/index.js"
