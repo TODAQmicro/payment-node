@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es2021",
+    "target": "es2020",
 
     "strict": true,
-    "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
     "noUnusedLocals": true,
-    "declaration": true,
 
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
 
-    "resolveJsonModule": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {},
-    "lib": ["ES2021"]
+    "lib": ["ES2020"],
+    "declaration": true
   },
   "include": ["src/**/*"]
 }
