@@ -1,6 +1,6 @@
 {
-  "name": "payment-node",
-  "version": "0.0.0",
+  "name": "@todaqmicro/payment-node",
+  "version": "0.0.1",
   "description": "TODAQ Micro's Node.js SDK",
   "main": "cjs/index.js",
   "exports": {
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "build:cjs": "tsc --module commonjs --outDir cjs/",
-    "build:esm": "tsc --module es2021 --outDir esm/",
+    "build:esm": "tsc --module es2020 --outDir esm/",
     "lint": "eslint src",
     "format": "eslint --fix src"
   },
