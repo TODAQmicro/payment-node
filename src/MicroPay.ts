@@ -22,7 +22,7 @@ export class Micro {
     'v2': 'v2',
   };
 
-  private authenticated: Promise<void> | null = null;
+  // private authenticated: Promise<void> | null = null;
 
   private clientId?: string;
   private clientSecret?: string;
@@ -50,6 +50,8 @@ export class Micro {
 
     this.accessToken = access_token;
     this.refreshToken = refresh_token;
+
+    console.log('ACCESS', this.accessToken, 'REFRESH', this.refreshToken);
   }
 
   private v: symbol | string = Symbol('latest');
@@ -71,7 +73,8 @@ export class Micro {
     }: MicroOptions,
   ) {
     this.version = apiVersion;
-    this.authenticated = this.authCredentials(clientId, clientSecret);
+
+    /*this.authenticated = */this.authCredentials(clientId, clientSecret);
 
     const protectedKeys = Object.keys(this);
     for (const resourceKey of Object.keys(resources)) {
