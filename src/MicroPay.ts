@@ -35,7 +35,7 @@ export class Micro {
     this.clientSecret = clientSecret;
 
     const response = await fetch(
-      `${API_BASE_URL}/${String(this.version)}/`,
+      `${API_BASE_URL}/${String(this.version)}/account/oauth/token`,
       {
         method: 'POST',
         headers: {
@@ -47,6 +47,8 @@ export class Micro {
     );
 
     const { access_token, refresh_token } = (await response.json() as any);
+
+    console.log('REQUEST', response);
 
     this.accessToken = access_token;
     this.refreshToken = refresh_token;
