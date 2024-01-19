@@ -27,7 +27,7 @@ export class Micro {
   private clientId?: string;
   private clientSecret?: string;
   // private get credentials() { return btoa(`${this.clientId}:${this.clientSecret}`); };
-  private accessToken: string = "";
+  public accessToken: string = "";
   private refreshToken: string = "";
 
   public async authCredentials(clientId: string, clientSecret: string): Promise<void> {
