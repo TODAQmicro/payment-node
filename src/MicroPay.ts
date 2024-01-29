@@ -19,7 +19,7 @@ export type MicroInterfaceObject = {
 export class Micro {
   static VERSIONS: { [type: symbol | string]: string } = {
     [Symbol('latest')]: 'v2',
-    'v2': 'v2',
+    v2: 'v2',
   };
 
   // private authenticated: Promise<void> | null = null;
@@ -30,7 +30,10 @@ export class Micro {
   public accessToken: string = "";
   private refreshToken: string = "";
 
-  public async authCredentials(clientId: string, clientSecret: string): Promise<void> {
+  public async authCredentials(
+    clientId: string,
+    clientSecret: string,
+  ): Promise<void> {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
 
@@ -40,13 +43,15 @@ export class Micro {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Basic ${Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64')}`,
+          Accept: 'application/json',
+          Authorization: `Basic ${Buffer.from(
+            `${this.clientId}:${this.clientSecret}`,
+          ).toString('base64')}`,
         },
       },
     );
 
-    const { access_token, refresh_token } = (await response.json() as any);
+    const { access_token, refresh_token } = (await response.json()) as any;
 
     console.log('REQUEST', response);
 
@@ -76,12 +81,12 @@ export class Micro {
   ) {
     this.version = apiVersion;
 
-    /*this.authenticated = */this.authCredentials(clientId, clientSecret);
+    /*this.authenticated = */ this.authCredentials(clientId, clientSecret);
 
     const protectedKeys = Object.keys(this);
     for (const resourceKey of Object.keys(resources)) {
       if (!protectedKeys.includes(resourceKey)) {
-        // NOTE(mihok): There is likely a better way to do this but isnt 
+        // NOTE(mihok): There is likely a better way to do this but isnt
         //  {Type|Java}Script fun!
         (this as any)[resourceKey] = (resources as any)[resourceKey];
       }

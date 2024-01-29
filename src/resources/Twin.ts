@@ -4,16 +4,80 @@ export type Twin = {
   key?: string;
 };
 
-export default {
-  getTwins(accessToken: string): Promise<Array<Twin>> {
-    console.error('NotImplementedError:', 'getTwins is not implemented');
+const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 
-    return Promise.resolve([]);
+export default {
+  async getTwins(accessToken: string): Promise<Array<Twin>> {
+    const request = fetch(`${API_BASE_URL}/v2/twins`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    let response: Response | null = null;
+    let data: Array<Twin> = [];
+
+    try {
+      response = await request;
+    } catch (err) {
+      return Promise.reject({
+        error: 'InternalServerError',
+        message: err,
+        status: undefined,
+      });
+    }
+
+    try {
+      const { twins } = (await response.json()) as { twins: Array<Twin> };
+
+      data = twins;
+    } catch (err) {
+      return Promise.reject({
+        error: 'Bad Response',
+        message: err,
+        status: response.status,
+      });
+    }
+
+    return Promise.resolve(data);
   },
 
-  getTwin(accessToken: string, twinId: number): Promise<Twin | null> {
-    console.error('NotImplementedError:', 'getTwin is not implemented');
+  async getTwin(accessToken: string, twinId: number): Promise<Twin | null> {
+    const request = fetch(`${API_BASE_URL}/v2/twin/${twinId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-    return Promise.reject(null);
+    let response: Response | null = null;
+    let data: Twin | null = null;
+
+    try {
+      response = await request;
+    } catch (err) {
+      return Promise.reject({
+        error: 'InternalServerError',
+        message: err,
+        status: undefined,
+      });
+    }
+
+    try {
+      data = (await response.json()) as Twin;
+    } catch (err) {
+      return Promise.reject({
+        error: 'Bad Response',
+        message: err,
+        status: response.status,
+      });
+    }
+
+    return Promise.resolve(data);
   },
 };

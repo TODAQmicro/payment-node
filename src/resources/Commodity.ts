@@ -20,7 +20,7 @@ export default {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${Buffer.from(accessToken).toString('base64')}`,
+        Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({
         cost,

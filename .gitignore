@@ -9,3 +9,6 @@ cjs
 
 # direnv
 .direnv
+
+# Apple
+.DS_Store
