@@ -1,8 +1,8 @@
+import { API_BASE_URL } from "./consts";
+
 export type ValidationNonce = {
   nonce: string;
 };
-
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 
 export default {
   validPayment: async function (

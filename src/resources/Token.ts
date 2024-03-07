@@ -1,11 +1,11 @@
+import { API_BASE_URL } from "./consts";
+
 export type Token = {
   token: string;
   expires_at: number;
   refresh_token: string;
   refresh_expires_at: number;
 };
-
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 
 export default {
   async getAccessToken(clientId: string, clientSecret: string): Promise<Token> {

@@ -1,3 +1,5 @@
+import { API_BASE_URL } from "./consts";
+
 export type Commodity = {
   cost: number;
   descriptor: string;
@@ -6,8 +8,6 @@ export type Commodity = {
   hostname: string;
   embed?: string;
 };
-
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 
 export default {
   createCommodity: async function (

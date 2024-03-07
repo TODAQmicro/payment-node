@@ -1,10 +1,10 @@
+import { API_BASE_URL } from "./consts";
+
 export type Twin = {
   id: number;
   hostname: string;
   key?: string;
 };
-
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 
 export default {
   async getTwins(accessToken: string): Promise<Array<Twin>> {
