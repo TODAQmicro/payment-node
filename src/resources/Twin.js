@@ -1,5 +1,43 @@
 import { API_BASE_URL } from "./consts";
+;
 export default {
+    async createTwin(accessToken, dq) {
+        const request = fetch(`${API_BASE_URL}/v2/twin`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+                dq,
+            }),
+        });
+        let response = null;
+        let data = null;
+        try {
+            response = await request;
+        }
+        catch (err) {
+            return Promise.reject({
+                error: 'InternalServerError',
+                message: err,
+                status: undefined,
+            });
+        }
+        try {
+            const twin = (await response.json());
+            data = twin;
+        }
+        catch (err) {
+            return Promise.reject({
+                error: 'Bad Response',
+                message: err,
+                status: response.status,
+            });
+        }
+        return Promise.resolve(data);
+    },
     async getTwins(accessToken) {
         const request = fetch(`${API_BASE_URL}/v2/twins`, {
             method: 'GET',
