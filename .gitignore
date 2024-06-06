@@ -1,7 +1,5 @@
 # Node.JS
 node_modules
-esm
-cjs
 .npmrc
 
 # vim swap files
