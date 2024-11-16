@@ -8,18 +8,23 @@ export class Micro {
     async authCredentials(clientId, clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-        const response = await fetch(`${API_BASE_URL}/${String(this.version)}/account/oauth/token`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                Authorization: `Basic ${Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64')}`,
-            },
-        });
-        const { access_token, refresh_token } = (await response.json());
-        console.log('REQUEST', response);
-        this.accessToken = access_token;
-        this.refreshToken = refresh_token;
+        try {
+            const response = await fetch(`${API_BASE_URL}/${String(this.version)}/account/oauth/token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Authorization: `Basic ${Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64')}`,
+                },
+            });
+            const { access_token, refresh_token } = (await response.json());
+            console.log('REQUEST', response);
+            this.accessToken = access_token;
+            this.refreshToken = refresh_token;
+        }
+        catch (error) {
+            console.error('ERROR', error);
+        }
         console.log('ACCESS', this.accessToken, 'REFRESH', this.refreshToken);
     }
     get version() {
