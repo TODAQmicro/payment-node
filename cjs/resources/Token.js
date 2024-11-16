@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const consts_1 = require("./consts");
+const consts_js_1 = require("./consts.js");
 exports.default = {
     async getAccessToken(clientId, clientSecret) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/account/oauth/token`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/account/oauth/token`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

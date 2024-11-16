@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./consts";
+import { API_BASE_URL } from "./consts.js";
 export default {
     validPayment: async function (accessToken, hash, nonce, timestamp) {
         const request = fetch(`${API_BASE_URL}/v2/payment/${hash}/validate`, {

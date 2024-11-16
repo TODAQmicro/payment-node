@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./consts";
+import { API_BASE_URL } from "./consts.js";
 
 export interface Twin {
   id: number,

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const consts_1 = require("./consts");
+const consts_js_1 = require("./consts.js");
 exports.default = {
     createCommodity: async function (accessToken, twinId, { cost, descriptor, dq }) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/commodity`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/commodity`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

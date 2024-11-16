@@ -1,4 +1,4 @@
-import { MicroOptions } from './types';
+import { MicroOptions } from './types.js';
 declare const interfaceCall: unique symbol;
 export type MicroInterfaceFunction = (...args: any) => Promise<void> | null;
 export type MicroInterfaceObject = {

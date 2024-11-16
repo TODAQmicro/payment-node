@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const consts_1 = require("./consts");
+const consts_js_1 = require("./consts.js");
 exports.default = {
     validPayment: async function (accessToken, hash, nonce, timestamp) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/payment/${hash}/validate`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/payment/${hash}/validate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
-import { MicroOptions } from './types';
-import * as resources from './resources';
-// import { MicroOptions, MicroInterface } from './types';
+import { MicroOptions } from './types.js';
+import * as resources from './resources/index.js';
+// import { MicroOptions, MicroInterface } from './types.js';
 
 const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 

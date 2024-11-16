@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./consts";
+import { API_BASE_URL } from "./consts.js";
 export default {
     createCommodity: async function (accessToken, twinId, { cost, descriptor, dq }) {
         const request = fetch(`${API_BASE_URL}/v2/commodity`, {

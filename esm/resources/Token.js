@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./consts";
+import { API_BASE_URL } from "./consts.js";
 export default {
     async getAccessToken(clientId, clientSecret) {
         const request = fetch(`${API_BASE_URL}/v2/account/oauth/token`, {

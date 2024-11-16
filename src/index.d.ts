@@ -1,3 +1,3 @@
-import { Micro } from './MicroPay';
-export { type MicroOptions } from './types';
+import { Micro } from './MicroPay.js';
+export { type MicroOptions } from './types.js';
 export default Micro;

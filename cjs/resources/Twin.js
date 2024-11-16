@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const consts_1 = require("./consts");
+const consts_js_1 = require("./consts.js");
 ;
 exports.default = {
     async createTwin(accessToken, dq) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/twin`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/twin`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ exports.default = {
         return Promise.resolve(data);
     },
     async getTwins(accessToken) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/twins`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/twins`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ exports.default = {
         return Promise.resolve(data);
     },
     async getTwin(accessToken, twinId) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v2/twin/${twinId}`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v2/twin/${twinId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

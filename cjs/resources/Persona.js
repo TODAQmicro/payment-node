@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const consts_1 = require("./consts");
+const consts_js_1 = require("./consts.js");
 exports.default = {
     delegatePersona: async function ({ accessToken, hash, hostname }) {
-        const request = fetch(`${consts_1.API_BASE_URL}/v3/persona/${hash}/delegate`, {
+        const request = fetch(`${consts_js_1.API_BASE_URL}/v3/persona/${hash}/delegate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

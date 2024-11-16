@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./consts";
+import { API_BASE_URL } from "./consts.js";
 export default {
     delegatePersona: async function ({ accessToken, hash, hostname }) {
         const request = fetch(`${API_BASE_URL}/v3/persona/${hash}/delegate`, {
