@@ -27,16 +27,8 @@ export class Micro {
   private clientId?: string;
   private clientSecret?: string;
   // private get credentials() { return btoa(`${this.clientId}:${this.clientSecret}`); };
-  public accessToken: string = "";
-  private refreshToken: string = "";
 
-  public async authCredentials(
-    clientId: string,
-    clientSecret: string,
-  ): Promise<void> {
-    this.clientId = clientId;
-    this.clientSecret = clientSecret;
-
+  public async authCredentials(): Promise<void> {
     try {
       const response = await fetch(
         `${API_BASE_URL}/${String(this.version)}/account/oauth/token`,
@@ -54,15 +46,12 @@ export class Micro {
 
       const { access_token, refresh_token } = (await response.json()) as any;
 
-      console.log('REQUEST', response);
-
-      this.accessToken = access_token;
-      this.refreshToken = refresh_token;
+      console.log('ACCESS', access_token, 'REFRESH', refresh_token, API_BASE_URL);
+      return access_token;
     } catch (error) {
       console.error('ERROR', error);
     }
 
-    console.log('ACCESS', this.accessToken, 'REFRESH', this.refreshToken);
   }
 
   private v: symbol | string = Symbol('latest');
@@ -83,16 +72,23 @@ export class Micro {
         : Symbol('latest'),
     }: MicroOptions,
   ) {
+    this.clientId = clientId;
+    this.clientSecret = clientSecret;
     this.version = apiVersion;
-
-    /*this.authenticated = */ this.authCredentials(clientId, clientSecret);
 
     const protectedKeys = Object.keys(this);
     for (const resourceKey of Object.keys(resources)) {
       if (!protectedKeys.includes(resourceKey)) {
         // NOTE(mihok): There is likely a better way to do this but isnt
         //  {Type|Java}Script fun!
-        (this as any)[resourceKey] = (resources as any)[resourceKey];
+        console.log('NODESDK', (resources as any)[resourceKey]);
+        if (!this.hasOwnProperty(resourceKey)) {
+          (this as any)[resourceKey] = {};
+        }
+        for (const fnKey of Object.keys((resources as any)[resourceKey])) {
+          (this as any)[resourceKey][fnKey] = (resources as any)[resourceKey][fnKey].bind(this);
+        }
+        // (this as any)[resourceKey] = (resources as any)[resourceKey];
       }
     }
   }

@@ -5,22 +5,30 @@ type ApiRequest = {
 }
 
 type DelegetePersonaByHostname = {
+  email: string,
   hash: string,
   hostname: string,
+  name: string,
 }
 
 export default {
-  delegatePersona: async function ({ accessToken, hash, hostname }: ApiRequest & DelegetePersonaByHostname) {
+  delegatePersona: async function ({ email, hash, hostname, name }: ApiRequest & DelegetePersonaByHostname) {
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      // @ts-ignore
+      Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
+    };
+    const body = JSON.stringify({
+      hostname,
+      name,
+      email,
+    });
+    console.log('DELEGATE PERSONA', headers, body);
     const request = fetch(`${API_BASE_URL}/v3/persona/${hash}/delegate`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        hostname,
-      }),
+      headers,
+      body,
     });
 
     let response: Response | null = null;
@@ -36,7 +44,7 @@ export default {
     }
 
     if (response?.ok) {
-      return Promise.resolve(await response.json());
+      return Promise.resolve(true);
     } else {
       return Promise.resolve(false);
     }

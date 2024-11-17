@@ -10,9 +10,7 @@ export declare class Micro {
     };
     private clientId?;
     private clientSecret?;
-    accessToken: string;
-    private refreshToken;
-    authCredentials(clientId: string, clientSecret: string): Promise<void>;
+    authCredentials(): Promise<void>;
     private v;
     private get version();
     private set version(value);

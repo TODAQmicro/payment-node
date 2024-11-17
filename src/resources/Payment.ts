@@ -6,17 +6,19 @@ export type ValidationNonce = {
 
 export default {
   validPayment: async function (
-    accessToken: string,
+    _: string,
     hash: string,
     nonce: string,
     timestamp: number,
   ): Promise<boolean> {
+    console.log('VALID PAYMENT', API_BASE_URL);
     const request = fetch(`${API_BASE_URL}/v2/payment/${hash}/validate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${accessToken}`,
+        // @ts-ignore
+        Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
       },
       body: JSON.stringify({
         nonce,
@@ -28,6 +30,7 @@ export default {
 
     try {
       response = await request;
+      console.log('RESPONSE', response);
     } catch (err) {
       return Promise.reject({
         error: 'InternalServerError',

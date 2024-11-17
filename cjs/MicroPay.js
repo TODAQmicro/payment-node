@@ -8,9 +8,8 @@ const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
 //  SDK.
 const interfaceCall = Symbol('interface-call');
 class Micro {
-    async authCredentials(clientId, clientSecret) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+    // private get credentials() { return btoa(`${this.clientId}:${this.clientSecret}`); };
+    async authCredentials() {
         try {
             const response = await fetch(`${API_BASE_URL}/${String(this.version)}/account/oauth/token`, {
                 method: 'POST',
@@ -21,14 +20,12 @@ class Micro {
                 },
             });
             const { access_token, refresh_token } = (await response.json());
-            console.log('REQUEST', response);
-            this.accessToken = access_token;
-            this.refreshToken = refresh_token;
+            console.log('ACCESS', access_token, 'REFRESH', refresh_token, API_BASE_URL);
+            return access_token;
         }
         catch (error) {
             console.error('ERROR', error);
         }
-        console.log('ACCESS', this.accessToken, 'REFRESH', this.refreshToken);
     }
     get version() {
         return Micro.VERSIONS[this.v];
@@ -40,18 +37,23 @@ class Micro {
         process.env.NODE_ENV !== 'produciton'
         ? 'main'
         : Symbol('latest'), }) {
-        // private get credentials() { return btoa(`${this.clientId}:${this.clientSecret}`); };
-        this.accessToken = "";
-        this.refreshToken = "";
         this.v = Symbol('latest');
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
         this.version = apiVersion;
-        /*this.authenticated = */ this.authCredentials(clientId, clientSecret);
         const protectedKeys = Object.keys(this);
         for (const resourceKey of Object.keys(resources)) {
             if (!protectedKeys.includes(resourceKey)) {
                 // NOTE(mihok): There is likely a better way to do this but isnt
                 //  {Type|Java}Script fun!
-                this[resourceKey] = resources[resourceKey];
+                console.log('NODESDK', resources[resourceKey]);
+                if (!this.hasOwnProperty(resourceKey)) {
+                    this[resourceKey] = {};
+                }
+                for (const fnKey of Object.keys(resources[resourceKey])) {
+                    this[resourceKey][fnKey] = resources[resourceKey][fnKey].bind(this);
+                }
+                // (this as any)[resourceKey] = (resources as any)[resourceKey];
             }
         }
     }
