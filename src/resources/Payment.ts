@@ -12,14 +12,16 @@ export default {
     timestamp: number,
   ): Promise<boolean> {
     console.log('VALID PAYMENT', API_BASE_URL);
+    const headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      // @ts-ignore
+      Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
+    };
+    console.log('VALIDATE HEADERS', headers);
     const request = fetch(`${API_BASE_URL}/v2/payment/${hash}/validate`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        // @ts-ignore
-        Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
-      },
+      headers,
       body: JSON.stringify({
         nonce,
         timestamp,

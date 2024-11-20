@@ -4,14 +4,16 @@ const consts_js_1 = require("./consts.js");
 exports.default = {
     validPayment: async function (_, hash, nonce, timestamp) {
         console.log('VALID PAYMENT', consts_js_1.API_BASE_URL);
+        const headers = {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            // @ts-ignore
+            Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
+        };
+        console.log('VALIDATE HEADERS', headers);
         const request = fetch(`${consts_js_1.API_BASE_URL}/v2/payment/${hash}/validate`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-                // @ts-ignore
-                Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
-            },
+            headers,
             body: JSON.stringify({
                 nonce,
                 timestamp,
