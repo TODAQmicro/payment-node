@@ -32,10 +32,10 @@ exports.default = {
             });
         }
         if (response?.ok) {
-            return Promise.resolve(true);
+            return Promise.resolve(response);
         }
         else {
-            return Promise.resolve(false);
+            return Promise.resolve(null);
         }
     },
 };

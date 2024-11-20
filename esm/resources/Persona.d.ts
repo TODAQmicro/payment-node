@@ -1,3 +1,4 @@
+/// <reference types="node" />
 type ApiRequest = {
     accessToken: string;
 };
@@ -8,6 +9,6 @@ type DelegetePersonaByHostname = {
     name: string;
 };
 declare const _default: {
-    delegatePersona: ({ email, hash, hostname, name }: ApiRequest & DelegetePersonaByHostname) => Promise<boolean>;
+    delegatePersona: ({ email, hash, hostname, name }: ApiRequest & DelegetePersonaByHostname) => Promise<Response | null>;
 };
 export default _default;
