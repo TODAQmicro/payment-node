@@ -11,7 +11,7 @@ exports.default = {
             Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
         };
         // @ts-ignore
-        console.log('VALIDATE HEADERS', headers, await this.authCredentials());
+        console.log('VALIDATE HEADERS', headers, await this.authCredentials(), this.clientId, this.clientSecret);
         const request = fetch(`${consts_js_1.API_BASE_URL}/v2/payment/${hash}/validate`, {
             method: 'POST',
             headers,
