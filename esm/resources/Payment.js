@@ -8,7 +8,8 @@ export default {
             // @ts-ignore
             Authorization: `Bearer ${this.authCredentials && await this.authCredentials()}`,
         };
-        console.log('VALIDATE HEADERS', headers);
+        // @ts-ignore
+        console.log('VALIDATE HEADERS', headers, await this.authCredentials());
         const request = fetch(`${API_BASE_URL}/v2/payment/${hash}/validate`, {
             method: 'POST',
             headers,
