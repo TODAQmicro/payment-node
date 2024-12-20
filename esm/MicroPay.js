@@ -1,6 +1,6 @@
 import * as resources from './resources/index.js';
 // import { MicroOptions, MicroInterface } from './types.js';
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8500';
+const API_BASE_URL = process.env.API_BASE_URL || 'https://pay.m.todaq.net';
 // interfaceCall is a Symbol that represents what might be an interface in the
 //  SDK.
 const interfaceCall = Symbol('interface-call');
